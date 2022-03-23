@@ -4,9 +4,7 @@ var taskIdCounter = 0;
 var pageContentEl = document.querySelector("#page-content");
 var tasksInProgressEl = document.querySelector("#tasks-in-progress");
 var tasksCompletedEl = document.querySelector("#tasks-completed");
-var tasks = [ 
-
-];
+var tasks = [];
 
 var taskStatusChangeHandler = function(event) {
     // get the task items id
@@ -217,6 +215,36 @@ var saveTasks = function() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
+var loadTasks = function() {
+    // get task items from localstorage
+    var retrievedTasks =JSON.parse(localStorage.getItem("tasks"));
+
+    
+
+    if (retrievedTasks === null) {
+        retrievedTasks = [];
+        return false;
+    };
+    for (var i = 0; i < retrievedTasks.length; i++) {
+        createTaskEl(retrievedTasks[i]);
+    }
+    
+};
+
+    
+   
+
+    
+    
+
+    // convert tasks from the string format back into an array of objects
+
+    // iterates through a tasks array and creates task elements on the page from it.
+   
+
+
 pageContentEl.addEventListener("click", taskButtonHandler);
 
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
+loadTasks();
